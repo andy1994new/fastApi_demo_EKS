@@ -5,4 +5,5 @@ locals {
   zone2       = "eu-west-1b"
   eks_name    = "fastapi"
   db_name     = "fastapidb"
+  db_password = "password"
 }
