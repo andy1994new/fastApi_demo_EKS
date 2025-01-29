@@ -37,6 +37,12 @@ cat $tmp_dir/$yaml_name
 # Update image tag in deployment YAML
 sed -i -e "s|andy2025/$image_name:.*|andy2025/$image_name:$new_ver|g" $tmp_dir/$yaml_name
 
+echo "After sed:"
+cat $tmp_dir/$yaml_name
+
+echo "After sed, git status:"
+git status
+
 # Navigate to repo
 cd $tmp_dir
 
