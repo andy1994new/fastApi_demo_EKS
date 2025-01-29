@@ -37,18 +37,15 @@ cat $tmp_dir/$yaml_name
 # Update image tag in deployment YAML
 sed -i -e "s|andy2025/$image_name:.*|andy2025/$image_name:$new_ver|g" $tmp_dir/$yaml_name
 
+echo "After sed:"
+cat $tmp_dir/$yaml_name
+
 # Navigate to repo
 cd $tmp_dir
-
-echo "befor indentity:"
-git status
 
 # Set Git user identity for CI/CD (Fixes "Author identity unknown" error)
 git config --global user.email "ci-bot@example.com"
 git config --global user.name "CI Bot"
-
-echo "after indentity:"
-git status
 
 # Commit and push changes if there are any
 git add .
