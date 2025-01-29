@@ -29,7 +29,7 @@ git clone https://github.com/andy1994new/argo.git $tmp_dir
 
 # Update image tag
 
-sed -i '' -e "s/andy2025\/$image_name:.*/andy2025\/$image_name:$new_ver/g" $tmp_dir/$yaml_name
+sed -i -e "s/andy2025\/$image_name:.*/andy2025\/$image_name:$new_ver/g" $tmp_dir/$yaml_name
 
 # Commit and push
 cd $tmp_dir
