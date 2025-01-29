@@ -3,11 +3,11 @@ SERVICES = user_service product_service order_service
 format:
 	for service in $(SERVICES); do \
 		$(MAKE) -C docker/$$service format; \
-	done	
+	done
 
 lint:
 	for service in $(SERVICES); do \
-		$(MAKE) -C docker/$$service format; \
+		$(MAKE) -C docker/$$service lint; \
 	done
 
 local_test:

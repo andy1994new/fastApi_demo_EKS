@@ -5,10 +5,10 @@ It defines the connection to the PostgreSQL database -
 and provides a sessionmaker for interacting with the database.
 """
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 import os
 import base64
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 ENV = os.getenv("ENV", "eks")
 
