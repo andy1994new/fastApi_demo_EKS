@@ -25,13 +25,6 @@ jobs:
     #       --health-retries=5
 
     steps:
-  
-
-    - name: Checkout other repositories
-      uses: actions/checkout@v4
-      with:
-        repository: andy1994new/argo
-        token: ${{ secrets.GH_TOKEN }} 
 
     - name: Checkout this repository
       uses: actions/checkout@v4
@@ -62,10 +55,24 @@ jobs:
 
     - name: Get Git Version
       run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-    - name: Login to DockerHub
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-    - name: Build and Push Images
+    # - name: Login to DockerHub
+    #   run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+    # - name: Build and Push Images
+    #   run: |
+    #     # sh update.sh $VERSION user
+    #     bash update.sh $VERSION product
+    #     # sh update.sh $VERSION order
+
+    - name: Checkout other repositories
+      uses: actions/checkout@v4
+      with:
+        repository: andy1994new/argo
+        token: ${{ secrets.GH_TOKEN }} 
+
+    - name: Modify the deployment.yaml
       run: |
-        # sh update.sh $VERSION user
-        bash update.sh $VERSION product
-        # sh update.sh $VERSION order
+        sed -i -e "s/andy2025\/user_service:.*/andy2025\/user_service:$new_ver/g" user-service.yaml
+        git add -A
+        git commit -m "Update user_service to $new_ver"
+        git push
+
