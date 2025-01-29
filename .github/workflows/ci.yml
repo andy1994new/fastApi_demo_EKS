@@ -67,5 +67,5 @@ jobs:
     - name: Build and Push Images
       run: |
         # sh update.sh $VERSION user
-        sh update.sh $VERSION product
+        bash update.sh $VERSION product
         # sh update.sh $VERSION order

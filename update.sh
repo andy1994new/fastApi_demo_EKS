@@ -41,7 +41,7 @@ git config --global user.name "CI Bot"
 
 git add .
 git commit -m "Update image to $new_ver"
-git push https://x-access-token:${ {secrets.GH_TOKEN} }@github.com/andy1994new/argo.git
+git push https://x-access-token:${{secrets.GH_TOKEN}}@github.com/andy1994new/argo.git
 
 
 # Optionally on build agents - remove folder
