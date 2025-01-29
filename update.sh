@@ -30,9 +30,15 @@ echo "Temporary directory: $tmp_dir"
 # Clone GitHub repo
 git clone https://github.com/andy1994new/argo.git $tmp_dir
 
+# Print before and after sed for debugging
+echo "Before sed:"
+cat $tmp_dir/$yaml_name
+
 # Update image tag in deployment YAML
-# sed -i -e "s|andy2025/$image_name:.*|andy2025/$image_name:$new_ver|g" $tmp_dir/$yaml_name
-sed -i -e "s/andy2025\/$image_name:.*/andy2025\/$image_name:$new_ver/g" $tmp_dir/$yaml_name
+sed -i -e "s|andy2025/$image_name:.*|andy2025/$image_name:$new_ver|g" $tmp_dir/$yaml_name
+
+echo "After sed:"
+cat $tmp_dir/$yaml_name
 
 # Navigate to repo
 cd $tmp_dir
@@ -41,10 +47,14 @@ cd $tmp_dir
 git config --global user.email "ci-bot@example.com"
 git config --global user.name "CI Bot"
 
-# Commit and push changes
+# Commit and push changes if there are any
 git add .
-git commit -m "Update $service_name-service image to $new_ver"
-git push
+if git diff --quiet; then
+    echo "No changes to commit."
+else
+    git commit -m "Update $service_name-service image to $new_ver"
+    git push
+fi
 
 # Cleanup
 rm -rf $tmp_dir
