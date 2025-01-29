@@ -10,6 +10,7 @@ lint:
 		$(MAKE) -C docker/$$service lint; \
 	done
 
-local_test:
-	brew services start postgresql
-	pytest test.py
+test:
+	for service in $(SERVICES); do \
+		$(MAKE) -C docker/$$service test; \
+	done
