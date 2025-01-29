@@ -3,24 +3,25 @@
 set -e
 
 new_ver=$1  # First argument: new version
-service_name=$2  # Second argument: service name
+service_name=$2  # Second argument: service name (e.g., user, order, product)
 
-if [[ -z "$new_ver" || -z "$service_name" ]]; then
-    echo "Usage: $0 <new_version> <service_name>"
-    exit 1
-fi
+# Convert service_name to match Docker image naming convention (underscore)
+image_name="${service_name}_service"
 
-echo "Building and pushing $service_name with version: $new_ver"
+# Convert service_name to match YAML file naming convention (dash)
+yaml_name="${service_name}-service.yaml"
+
+echo "Building and pushing $image_name with version: $new_ver"
 
 # Build the Docker image
-docker build -t andy2025/$service_name:$new_ver docker/$service_name
+docker build -t andy2025/$image_name:$new_ver docker/$image_name
 
 # Tag the image
-docker tag andy2025/$service_name:$new_ver andy2025/$service_name:latest
+docker tag andy2025/$image_name:$new_ver andy2025/$image_name:latest
 
 # Push the new version and latest tag to DockerHub
-docker push andy2025/$service_name:$new_ver
-docker push andy2025/$service_name:latest
+docker push andy2025/$image_name:$new_ver
+docker push andy2025/$image_name:latest
 
 # Create a temporary folder
 tmp_dir=$(mktemp -d)
@@ -30,15 +31,15 @@ echo "Temporary directory: $tmp_dir"
 git clone https://github.com/andy1994new/argo.git $tmp_dir
 
 # Update image tag in deployment YAML
-sed -i -e "s|andy2025/$service_name:.*|andy2025/$service_name:$new_ver|g" $tmp_dir/$service_name.yaml
+sed -i -e "s|andy2025/$image_name:.*|andy2025/$image_name:$new_ver|g" $tmp_dir/$yaml_name
 
 # Commit and push changes
 cd $tmp_dir
 git add .
-git commit -m "Update $service_name image to $new_ver"
+git commit -m "Update $service_name-service image to $new_ver"
 git push
 
 # Cleanup
 rm -rf $tmp_dir
 
-echo "Successfully updated $service_name to version $new_ver"
+echo "Successfully updated $service_name-service to version $new_ver"
