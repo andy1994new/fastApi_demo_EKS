@@ -43,7 +43,7 @@ git add .
 git commit -m "Update image to $new_ver"
 
 echo "GITHUB_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
-git push https://x-access-token:${$GITHUB_TOKEN}@github.com/andy1994new/argo.git
+git push https://x-access-token:${GITHUB_TOKEN}@github.com/andy1994new/argo.git
 
 
 # Optionally on build agents - remove folder
