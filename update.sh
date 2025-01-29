@@ -27,13 +27,13 @@ echo $tmp_dir
 # Clone GitHub repo
 git clone https://github.com/andy1994new/argo.git $tmp_dir
 
-# Set Git user identity for CI/CD (Fixes "Author identity unknown" error)
-git config --global user.email "ci-bot@example.com"
-git config --global user.name "CI Bot"
-
 # Update image tag
 
 sed -i -e "s/andy2025\/$image_name:.*/andy2025\/$image_name:$new_ver/g" $tmp_dir/$yaml_name
+
+# Set Git user identity for CI/CD (Fixes "Author identity unknown" error)
+git config --global user.email "ci-bot@example.com"
+git config --global user.name "CI Bot"
 
 # Commit and push
 cd $tmp_dir
