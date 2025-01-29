@@ -10,13 +10,14 @@ import base64
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 ENV = os.getenv("ENV", "eks")
 
 DATABASE_URLS = {
     "local": "postgresql://andyg:@localhost:5432/postgres",
     "docker": "postgresql://user:password@db:5432/app_db",
     "k8s": "postgresql://user:password@postgres-service:5432/app_db",
-    "eks": None,  # Will be dynamically built from environment variables
+    "eks": None,
 }
 
 if ENV == "eks":
@@ -40,10 +41,11 @@ else:
 if not SQLALCHEMY_DATABASE_URL:
     raise ValueError(f"Invalid environment '{ENV}' or missing database configuration.")
 
+# Create a database engine
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 
-User_Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Product_Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def get_db():
@@ -57,7 +59,7 @@ def get_db():
     Returns:
         Session: A SQLAlchemy session object.
     """
-    db = User_Session()
+    db = Product_Session()
     try:
         yield db
     finally:
