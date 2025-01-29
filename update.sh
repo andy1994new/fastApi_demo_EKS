@@ -40,6 +40,9 @@ sed -i -e "s|andy2025/$image_name:.*|andy2025/$image_name:$new_ver|g" $tmp_dir/$
 echo "After sed:"
 cat $tmp_dir/$yaml_name
 
+git status
+git diff
+
 # Navigate to repo
 cd $tmp_dir
 
