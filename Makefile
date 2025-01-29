@@ -14,3 +14,5 @@ test:
 	for service in $(SERVICES); do \
 		$(MAKE) -C docker/$$service test; \
 	done
+
+push:
