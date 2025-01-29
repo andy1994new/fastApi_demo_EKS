@@ -24,12 +24,12 @@ echo "new version: $new_ver"
 tmp_dir=$(mktemp -d)
 echo $tmp_dir
 
+# Clone GitHub repo
+git clone https://github.com/andy1994new/argo.git $tmp_dir
+
 # Set Git user identity for CI/CD (Fixes "Author identity unknown" error)
 git config --global user.email "ci-bot@example.com"
 git config --global user.name "CI Bot"
-
-# Clone GitHub repo
-git clone https://github.com/andy1994new/argo.git $tmp_dir
 
 # Update image tag
 
