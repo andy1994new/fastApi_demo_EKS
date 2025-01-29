@@ -63,11 +63,11 @@ jobs:
     #     bash update.sh $VERSION product
     #     # sh update.sh $VERSION order
 
-    - name: Checkout other repositories
-      uses: actions/checkout@v4
-      with:
-        repository: andy1994new/argo
-        token: ${{ secrets.GH_TOKEN }} 
+    # - name: Checkout other repositories
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: andy1994new/argo
+    #     token: ${{ secrets.GH_TOKEN }} 
 
     - name: Modify the deployment.yaml
       run: |
