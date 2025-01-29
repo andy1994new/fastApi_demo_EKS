@@ -29,11 +29,11 @@ jobs:
     - name: Checkout this repository
       uses: actions/checkout@v4
 
-    - name: Checkout other repositories
-      uses: actions/checkout@v4
-      with:
-        repository: andy1994new/argo
-        token: ${{ secrets.GH_TOKEN }} 
+    # - name: Checkout other repositories
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: andy1994new/argo
+    #     token: ${{ secrets.GH_TOKEN }} 
     
     # - name: Set up Python ${{ matrix.python-version }}
     #   uses: actions/setup-python@v3
