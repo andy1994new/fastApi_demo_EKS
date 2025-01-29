@@ -36,8 +36,7 @@ sed -i -e "s/andy2025\/$image_name:.*/andy2025\/$image_name:$new_ver/g" $tmp_dir
 cd $tmp_dir
 
 # Set Git user identity for CI/CD (Fixes "Author identity unknown" error)
-git config --global user.email "ci-bot@example.com"
-git config --global user.name "CI Bot"
+git config --global user.name "andy1994new"
 
 git add .
 git commit -m "Update image to $new_ver"
