@@ -1,13 +1,16 @@
 import httpx
 import pytest
+import asyncio
 
 # order_service_url = "http://localhost:8000"
 # user_service_url = "http://localhost:8001"
 # product_service_url = "http://localhost:8002"
 
 order_service_url = "http://order-service:8000"
-user_service_url = "http://user-service:8001"
-product_service_url = "http://product-service:8002"
+user_service_url = "http://user-service:8000"
+product_service_url = "http://product-service:8000"
+
+
 
 # Helper function to create users
 async def create_user(client, name: str):
