@@ -1,0 +1,55 @@
+services:
+  product-service:
+    image: andy2025/product_service:latest
+    ports:
+      - "8002:8000"
+    networks:
+      - app_network
+    environment:
+      - ENV=docker
+
+  user-service:
+    image: andy2025/user_service:latest
+    ports:
+      - "8001:8000"
+    networks:
+      - app_network
+    environment:
+      - ENV=docker
+
+  order-service:
+    image: andy2025/order_service:latest
+    ports:
+      - "8000:8000"
+    depends_on:
+      product-service:
+        condition: service_started
+      user-service:
+        condition: service_started
+      db:
+        condition: service_healthy
+    networks:
+      - app_network
+    environment:
+      - ENV=docker
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app_db
+    ports:
+      - "5433:5432"
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user", "-d", "app_db"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+networks:
+  app_network:
+    driver: bridge
