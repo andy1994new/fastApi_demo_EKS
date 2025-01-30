@@ -3,9 +3,6 @@ services:
     image: andy2025/product_service:latest
     ports:
       - "8002:8000"
-    depends_on:
-      db:
-        condition: service_healthy
     networks:
       - app_network
     environment:
@@ -15,9 +12,6 @@ services:
     image: andy2025/user_service:latest
     ports:
       - "8001:8000"
-    depends_on:
-      db:
-        condition: service_healthy
     networks:
       - app_network
     environment:
@@ -32,8 +26,8 @@ services:
         condition: service_started
       user-service:
         condition: service_started
-      db:
-        condition: service_healthy
+    #   db:
+    #     condition: service_healthy
     networks:
       - app_network
     environment:
