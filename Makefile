@@ -16,11 +16,10 @@ test:
 	done
 
 docker-compose-test:
-	cd docker/test
-	docker compose up -d
-	sleep 5
-	docker compose  exec user-service pytest test.py
-	docker compose down
+	docker compose -f docker/order_service/test/docker-compose.yml up -d 
+	sleep 1
+	docker compose exec order-service pytest /app/test/test.py
+	docker compose -f docker/order_service/test/docker-compose.yml down
 
 update:
 	for service in $(SERVICES); do \

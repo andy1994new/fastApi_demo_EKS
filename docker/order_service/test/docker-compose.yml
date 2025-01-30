@@ -6,7 +6,7 @@ services:
     networks:
       - app_network
     environment:
-      - ENV=docker
+      - ENV=local
 
   user-service:
     image: andy2025/user_service:latest
@@ -15,7 +15,7 @@ services:
     networks:
       - app_network
     environment:
-      - ENV=docker
+      - ENV=local
 
   order-service:
     image: andy2025/order_service:latest
@@ -31,7 +31,7 @@ services:
     networks:
       - app_network
     environment:
-      - ENV=docker
+      - ENV=local
 
   # db:
   #   image: postgres:latest
