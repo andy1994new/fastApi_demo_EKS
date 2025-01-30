@@ -6,7 +6,6 @@ new_ver=$1
 service_name=$2
 
 image_name="${service_name}_service"
-yaml_name="${service_name}-service.yaml"
 
 echo "new version: $new_ver"
 

@@ -25,7 +25,6 @@ jobs:
           --health-retries=5
 
     steps:
-
     - name: Checkout this repository
       uses: actions/checkout@v4
       with:
@@ -57,17 +56,24 @@ jobs:
       run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
     - name: Login to DockerHub
       run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    # - name: Build and Push Images
+    #   run: make update VERSION=$VERSION
     - name: Build and Push Images
       run: |
         sh update.sh $VERSION user
         bash update.sh $VERSION product
         sh update.sh $VERSION order
 
+    - name: Run Integration Tests with Docker Compose
+      run: |
+        make docker-compose-test
+
     - name: Checkout other repositories
       uses: actions/checkout@v4
       with:
         repository: andy1994new/argo
-        token: ${{ secrets.GH_TOKEN }} 
+        token: ${{ secrets.GH_TOKEN }}
 
     - name: Modify the deployment.yaml
       run: |

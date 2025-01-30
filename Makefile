@@ -15,6 +15,12 @@ test:
 		$(MAKE) -C docker/$$service test; \
 	done
 
+docker-compose-test:
+	docker compose -f docker/test/docker-compose.yml up -d
+	sleep 10
+	pytest docker/test/test.py
+	docker compose -f docker/test/docker-compose.yml down
+
 update:
 	for service in $(SERVICES); do \
 		sh update.sh $(VERSION) $$(echo $$service | sed 's/_service//'); \
