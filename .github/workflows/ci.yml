@@ -8,21 +8,21 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.12"]
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: andyg
-          POSTGRES_PASSWORD: ""
-          POSTGRES_DB: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U andyg"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+    # services:
+    #   postgres:
+    #     image: postgres:latest
+    #     env:
+    #       POSTGRES_USER: andyg
+    #       POSTGRES_PASSWORD: ""
+    #       POSTGRES_DB: postgres
+    #       POSTGRES_HOST_AUTH_METHOD: trust
+    #     ports:
+    #       - 5432:5432
+    #     options: >-
+    #       --health-cmd="pg_isready -U andyg"
+    #       --health-interval=10s
+    #       --health-timeout=5s
+    #       --health-retries=5
 
     steps:
     - name: Checkout this repository
@@ -70,7 +70,7 @@ jobs:
 
     - name: Run Integration Tests
       run: |
-        docker compose exec test-app pwd
+        docker-compose exec test-app pwd
         # docker compose exec test-app pytest app/test.py
 
 
