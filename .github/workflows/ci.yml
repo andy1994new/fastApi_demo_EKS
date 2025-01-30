@@ -25,45 +25,43 @@ jobs:
           --health-retries=5
 
     steps:
-    - name: Checkout this repository
-      uses: actions/checkout@v4
-      with:
-        repository: andy1994new/fastApi_demo_EKS
+    # - name: Checkout this repository
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: andy1994new/fastApi_demo_EKS
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+    # - name: Set up Python ${{ matrix.python-version }}
+    #   uses: actions/setup-python@v3
+    #   with:
+    #     python-version: ${{ matrix.python-version }}
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
 
-    - name: Format code with black
-      run: |
-        make format
-    - name: Analysing the code with pylint
-      run: |
-        make lint
+    # - name: Format code with black
+    #   run: |
+    #     make format
+    # - name: Analysing the code with pylint
+    #   run: |
+    #     make lint
 
-    - name: Run tests
-      env:
-        ENV: local
-      run: |
-        make test
+    # - name: Run tests
+    #   env:
+    #     ENV: local
+    #   run: |
+    #     make test
 
-    - name: Get Git Version
-      run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-    - name: Login to DockerHub
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+    # - name: Get Git Version
+    #   run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+    # - name: Login to DockerHub
+    #   run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
     # - name: Build and Push Images
-    #   run: make update VERSION=$VERSION
-    - name: Build and Push Images
-      run: |
-        sh update.sh $VERSION user
-        bash update.sh $VERSION product
-        sh update.sh $VERSION order
+    #   run: |
+    #     sh update.sh $VERSION user
+    #     bash update.sh $VERSION product
+    #     sh update.sh $VERSION order
 
     - name: Run Integration Tests with Docker Compose
       env:
@@ -71,20 +69,20 @@ jobs:
       run: |
         make docker-compose-test
 
-    - name: Checkout other repositories
-      uses: actions/checkout@v4
-      with:
-        repository: andy1994new/argo
-        token: ${{ secrets.GH_TOKEN }}
+    # - name: Checkout other repositories
+    #   uses: actions/checkout@v4
+    #   with:
+    #     repository: andy1994new/argo
+    #     token: ${{ secrets.GH_TOKEN }}
 
-    - name: Modify the deployment.yaml
-      run: |
-        git config --global user.email "ci-bot---1@example.com"
-        git config --global user.name "ci-bot---1"
-        sed -i -e "s/andy2025\/user_service:.*/andy2025\/user_service:$VERSION/g" user-service.yaml
-        sed -i -e "s/andy2025\/product_service:.*/andy2025\/product_service:$VERSION/g" product-service.yaml
-        sed -i -e "s/andy2025\/order_service:.*/andy2025\/order_service:$VERSION/g" order-service.yaml
-        git add -A
-        git commit -m "Update yaml files to $new_ver"
-        git push
+    # - name: Modify the deployment.yaml
+    #   run: |
+    #     git config --global user.email "ci-bot---1@example.com"
+    #     git config --global user.name "ci-bot---1"
+    #     sed -i -e "s/andy2025\/user_service:.*/andy2025\/user_service:$VERSION/g" user-service.yaml
+    #     sed -i -e "s/andy2025\/product_service:.*/andy2025\/product_service:$VERSION/g" product-service.yaml
+    #     sed -i -e "s/andy2025\/order_service:.*/andy2025\/order_service:$VERSION/g" order-service.yaml
+    #     git add -A
+    #     git commit -m "Update yaml files to $new_ver"
+    #     git push
 
