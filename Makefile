@@ -18,7 +18,7 @@ test:
 docker-compose-test:
 	docker compose -f docker/test/docker-compose.yml up -d
 	sleep 10
-	docker compose exec user-service pytest docker/test/test.py
+	docker compose -f docker/test/docker-compose.yml run --rm user-service pytest docker/test/test.py
 	docker compose -f docker/test/docker-compose.yml down
 
 update:
