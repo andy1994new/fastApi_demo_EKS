@@ -63,17 +63,14 @@ jobs:
     #     bash update.sh $VERSION product
     #     sh update.sh $VERSION order
 
-    - name: Build and Start Services with Docker Compose
-      run: |
-        docker compose -f docker/test/docker-compose.yml up -d
+    - name: Run docker-compose
+      uses: hoverkraft-tech/compose-action@v2.0.1
+      with:
+        compose-file: "./docker/test/docker-compose.yml"
 
     - name: Run Integration Tests
       run: |
-        docker compose exec -T order-service pytest app/test/test.py
-
-    - name: Shut down Docker Compose
-      run: |
-        docker compose -f docker/test/docker-compose.yml down
+        docker compose exec test-app pytest
 
 
     # - name: Checkout other repositories

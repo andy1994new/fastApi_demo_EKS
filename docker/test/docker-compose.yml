@@ -1,4 +1,11 @@
 services:
+
+  test_app:
+    build: .
+    container_name: test_app
+    networks:
+      - app_network
+
   product-service:
     image: andy2025/product_service:latest
     ports:
