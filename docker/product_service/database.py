@@ -15,7 +15,7 @@ ENV = os.getenv("ENV", "eks")
 
 DATABASE_URLS = {
     "local": "postgresql://andyg:@localhost:5432/postgres",
-    "docker": "postgresql://user:password@db:5432/app_db",
+    "docker": "postgresql://user:password@db:5433/app_db",
     "k8s": "postgresql://user:password@postgres-service:5432/app_db",
     "eks": None,
 }
