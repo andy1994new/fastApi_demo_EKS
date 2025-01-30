@@ -65,7 +65,7 @@ jobs:
 
     - name: Build and Start Services with Docker Compose
       run: |
-        docker-compose -f docker/test/docker-compose.yml up -d
+        docker compose -f docker/test/docker-compose.yml up -d
 
     - name: Run Integration Tests
       run: |
@@ -73,7 +73,7 @@ jobs:
 
     - name: Shut down Docker Compose
       run: |
-        docker-compose -f docker/test/docker-compose.yml down
+        docker compose -f docker/test/docker-compose.yml down
 
 
     # - name: Checkout other repositories
