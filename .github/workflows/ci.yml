@@ -66,6 +66,8 @@ jobs:
         sh update.sh $VERSION order
 
     - name: Run Integration Tests with Docker Compose
+      env:
+        ENV: local
       run: |
         make docker-compose-test
 
