@@ -63,11 +63,18 @@ jobs:
     #     bash update.sh $VERSION product
     #     sh update.sh $VERSION order
 
-    - name: Run Integration Tests with Docker Compose
-      env:
-        ENV: local
+    - name: Build and Start Services with Docker Compose
       run: |
-        make docker-compose-test
+        docker-compose -f docker/test/docker-compose.yml up -d
+
+    - name: Run Integration Tests
+      run: |
+        pytest docker/test/test.py
+
+    - name: Shut down Docker Compose
+      run: |
+        docker-compose -f docker/test/docker-compose.yml down
+
 
     # - name: Checkout other repositories
     #   uses: actions/checkout@v4
