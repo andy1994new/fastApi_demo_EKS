@@ -57,11 +57,11 @@ jobs:
     # - name: Login to DockerHub
     #   run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-    # - name: Build and Push Images
-    #   run: |
-    #     sh update.sh $VERSION user
-    #     bash update.sh $VERSION product
-    #     sh update.sh $VERSION order
+    - name: Build and Push Images
+      run: |
+        sh update.sh $VERSION user
+        bash update.sh $VERSION product
+        sh update.sh $VERSION order
 
     - name: Run docker-compose
       uses: hoverkraft-tech/compose-action@v2.0.1
