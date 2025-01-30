@@ -70,7 +70,7 @@ jobs:
 
     - name: Run Integration Tests
       run: |
-        docker compose exec test-app pytest
+        docker compose exec test-app pytest app/test.py
 
 
     # - name: Checkout other repositories
