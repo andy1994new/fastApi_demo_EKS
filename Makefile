@@ -15,4 +15,7 @@ test:
 		$(MAKE) -C docker/$$service test; \
 	done
 
-push:
+update:
+	for service in $(SERVICES); do \
+		sh update.sh $(VERSION) $$(echo $$service | sed 's/_service//'); \
+	done
