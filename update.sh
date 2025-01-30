@@ -10,7 +10,7 @@ image_name="${service_name}_service"
 echo "new version: $new_ver"
 
 # Build the Docker image
-docker build -t andy2025/$image_name:$new_ver docker/$image_name
+docker build --platform linux/amd64 -t andy2025/$image_name:$new_ver docker/$image_name
 
 # Tag the image
 docker tag andy2025/$image_name:$new_ver andy2025/$image_name:latest
