@@ -70,7 +70,7 @@ jobs:
 
     - name: Run Integration Tests
       run: |
-        docker-compose exec test-app pwd
+        docker compose exec -T test-app bash -c "pwd"
         # docker compose exec test-app pytest app/test.py
 
 
