@@ -25,10 +25,10 @@ jobs:
           --health-retries=5
 
     steps:
-    # - name: Checkout this repository
-    #   uses: actions/checkout@v4
-    #   with:
-    #     repository: andy1994new/fastApi_demo_EKS
+    - name: Checkout this repository
+      uses: actions/checkout@v4
+      with:
+        repository: andy1994new/fastApi_demo_EKS
 
     # - name: Set up Python ${{ matrix.python-version }}
     #   uses: actions/setup-python@v3
