@@ -70,8 +70,6 @@ jobs:
       # with:
       #   compose-file: "./docker/test/docker-compose.yml"
 
-    
-
     - name: Run Integration Tests
       run: |
         docker exec test-app pytest test.py

@@ -1,4 +1,5 @@
 SERVICES = user_service product_service order_service
+
 local_setup:
 	sh local_evn_setup.sh
 

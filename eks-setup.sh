@@ -1,17 +1,26 @@
+#!/bin/bash
+
 set -e
 set -o pipefail
 
+echo "🔹 Switching to Terraform directory..."
 cd terraform
 
-echo "Initializing Terraform..."
+echo "🔹 Initializing Terraform..."
 terraform init
 
-echo "Creating EKS cluster..."
+echo "🔹 Validating Terraform configuration..."
+terraform validate
+
+echo "🚀 Creating EKS cluster..."
 terraform apply -target=module.eks -auto-approve
 
-echo "Creating remaining resources..."
+echo "🚀 Deploying remaining infrastructure..."
 terraform apply -auto-approve
 
-echo "Deployment completed successfully!"
+echo "✅ Deployment completed successfully!"
 
-cd ..
+echo "🔹 Applying ArgoCD application configuration..."
+kubectl apply -f ../argoApp.yaml
+
+echo "🎉 Setup complete!"
