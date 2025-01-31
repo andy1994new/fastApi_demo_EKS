@@ -64,9 +64,13 @@ jobs:
         sh update.sh $VERSION order
 
     - name: Run docker-compose
-      uses: hoverkraft-tech/compose-action@v2.0.1
-      with:
-        compose-file: "./docker/test/docker-compose.yml"
+      run: |
+        docker compose -f docker/test/docker-compose.yml
+      # uses: hoverkraft-tech/compose-action@v2.0.1
+      # with:
+      #   compose-file: "./docker/test/docker-compose.yml"
+
+    
 
     - name: Run Integration Tests
       run: |
