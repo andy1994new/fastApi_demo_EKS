@@ -48,7 +48,7 @@ app = FastAPI()
 @app.get("/")
 def get_index():
     """Handle GET request for the root endpoint."""
-    return {"msg": "Order service"}
+    return {"msg": "Order service", "url": USER_SERVICE_URL}
 
 
 @app.post("/order")
