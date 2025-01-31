@@ -20,11 +20,8 @@ test:
 		$(MAKE) -C docker/$$service test; \
 	done
 
-# docker-compose-test:
-# 	docker compose -f docker/test/docker-compose.yml up -d 
-# 	sleep 1
-# 	pytest docker/test/test.py
-# 	docker compose -f docker/test/docker-compose.yml down
+docker-compose-build:
+	docker compose -f docker/test/docker-compose.yml up -d 
 
 update:
 	for service in $(SERVICES); do \

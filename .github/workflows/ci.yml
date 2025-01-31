@@ -65,7 +65,7 @@ jobs:
 
     - name: Run docker-compose
       run: |
-        docker compose -f docker/test/docker-compose.yml
+        docker compose -f docker/test/docker-compose.yml up -d 
       # uses: hoverkraft-tech/compose-action@v2.0.1
       # with:
       #   compose-file: "./docker/test/docker-compose.yml"
