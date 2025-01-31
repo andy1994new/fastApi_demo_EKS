@@ -35,7 +35,7 @@ spec:
       containers:
 
       - name: product-service
-        image: andy2025/product_service:v3
+        image: andy2025/product_service:9eaedd4
         ports:
         - containerPort: 8000
 
