@@ -1,4 +1,9 @@
 SERVICES = user_service product_service order_service
+local_setup:
+	sh local_evn_setup.sh
+
+AWS_setup:
+	sh eks-setup.sh
 
 format:
 	for service in $(SERVICES); do \

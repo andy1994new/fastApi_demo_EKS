@@ -1,3 +1,4 @@
+# only for test stage
 set -e
 set -o pipefail
 
